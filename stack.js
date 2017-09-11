@@ -8,7 +8,6 @@ class Node {
 class Stack{
     constructor(){
         this.root = undefined;
-        this.length = 0;
     }
 
     push(value) {
@@ -21,7 +20,6 @@ class Stack{
             node.previous = this.root;
             this.root = node;
         }
-        this.length++;
     }
 
     pop() {
@@ -29,7 +27,6 @@ class Stack{
         } else {
             let temp = this.root;
             this.root = this.root.previous;
-            this.length--;
             return temp.data;
         }
     }
