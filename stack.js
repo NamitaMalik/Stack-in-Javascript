@@ -1,71 +1,55 @@
-function Node() {
-    var data;
-    var previous;
-    this.getData = getData;
-    this.setData = setData;
-    this.setPrevious = setPrevious;
-    this.getPrevious = getPrevious;
-
-    function setPrevious(p) {
-        previous = p;
-    }
-
-    function getPrevious() {
-        return previous;
-    }
-
-    function getData() {
-        return data;
-    }
-
-    function setData(d) {
-        data = d;
+class Node {
+    constructor(){
+        this.data = undefined;
+        this.previous = undefined;
     }
 }
 
-function Stack() {
-    var root;
-    this.push = push;
-    this.pop = pop;
-    this.print = print;
+class Stack{
+    constructor(){
+        this.root = undefined;
+        this.length = 0;
+    }
 
-    function push(value) {
-        var node = new Node();
-        node.setData(value);
-        if (!root) {
-            root = node;
-            root.setPrevious(null);
+    push(value) {
+        let node = new Node();
+        node.data= value;
+        if (!this.root) {
+            this.root = node;
+            this.root.previous = null;
         } else {
-            node.setPrevious(root);
-            root = node;
+            node.previous = this.root;
+            this.root = node;
+        }
+        this.length++;
+    }
+
+    pop() {
+        if (!this.root) {
+        } else {
+            let temp = this.root;
+            this.root = this.root.previous;
+            this.length--;
+            return temp.data;
         }
     }
 
-    function pop() {
-        if (!root) {
-            return;
-        } else {
-            root = root.getPrevious();
-        }
-
-    }
-
-    function print() {
-        var temp = root;
-        var result = [];
+    print() {
+        let temp = this.root;
+        let result = [];
         while (temp) {
-            result.push(temp.getData());
-            temp = temp.getPrevious();
+            result.push(temp.data);
+            temp = temp.previous;
         }
         console.log(result.join(' => '));
     }
 }
 
 var stack = new Stack();
-stack.push(5);
-stack.push(6);
-stack.push(7);
-stack.push(8);
+stack.push('b');
+stack.push('a');
+stack.push('k');
+stack.push('e');
 stack.print();
 stack.pop();
 stack.print();
