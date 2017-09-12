@@ -84,4 +84,140 @@ pop() {
 }
 ```
 
+Now, our implementation for **Stack** is complete, but we still need a **print()** method, let's quickly implement it:
 
+```
+print() {
+    let temp = this.root;
+    let result = [];
+    while (temp) {
+        result.push(temp.data);
+        temp = temp.previous;
+    }
+    console.log(result.join(' => '));
+}
+```
+
+Here is how the complete code would look like:
+
+```
+class Node {
+    constructor(){
+        this.data = undefined;
+        this.previous = undefined;
+    }
+}
+
+class Stack{
+    constructor(){
+        this.root = undefined;
+    }
+
+    push(value) {
+        let node = new Node();
+        node.data= value;
+        if (!this.root) {
+            this.root = node;
+            this.root.previous = null;
+        } else {
+            node.previous = this.root;
+            this.root = node;
+        }
+    }
+
+    pop() {
+        if (!this.root) {
+        } else {
+            let temp = this.root;
+            this.root = this.root.previous;
+            return temp.data;
+        }
+    }
+
+    print() {
+        let temp = this.root;
+        let result = [];
+        while (temp) {
+            result.push(temp.data);
+            temp = temp.previous;
+        }
+        console.log(result.join(' => '));
+    }
+}
+```
+
+Let's check if the code works:
+
+```
+var stack = new Stack();
+stack.push('l');
+stack.push('a');
+stack.push('l');
+stack.push('a');
+stack.print(); // a => l => a => l
+stack.pop();
+stack.print(); //l => a => l
+```
+
+Now, many of you might have a thought when in Javascript, we have a **Array** that has **push** and **pop** methods, why to do so much of hard work.
+
+Well, in **Javascript** even though we have **push** and **pop** methods, we have other methods as well like **shift()**, **unshift()**, **join()**, hence it is not purely a stack.
+So, let's create a stack using array. The idea is to have an array assigned to a private variable with only **push** and **pop** methods exposed:
+
+```
+function StackByArray() {
+    var arr = [];
+
+    this.push = push;
+    this.pop = pop;
+    this.print = print;
+
+    function push(node) {
+        arr.push(node)
+    }
+
+    function pop() {
+        arr.pop();
+    }
+
+    function print() {
+        console.log(arr.join(' => '))
+    }
+}
+```
+
+Let's check the code:
+
+```
+function StackByArray() {
+    var arr = [];
+    this.push = push;
+    this.pop = pop;
+    this.print = print;
+
+    function push(node) {
+        arr.push(node)
+    }
+
+    function pop() {
+        arr.pop();
+    }
+
+    function print() {
+        console.log(arr.join(' => '))
+    }
+}
+var stackByArr = new StackByArray();
+stackByArr.push('l');
+stackByArr.push('a');
+stackByArr.push('l');
+stackByArr.push('a');
+stackByArr.print(); //l => a => l => a
+stackByArr.pop();
+stackByArr.print(); //l => a => l
+```
+
+One can use any of the above mentioned implementations. 
+
+A very common example where **Stack** data structure is used is the undo/redo mechanism. In this case all text changes are kept in the stack. Another common example is the **Back** button
+of your browser. When a user navigates between the pages, navigated urls are stored in the form of **Stack**. Well, there are many more use cases...think about them!

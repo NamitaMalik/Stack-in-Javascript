@@ -43,10 +43,40 @@ class Stack{
 }
 
 var stack = new Stack();
-stack.push('b');
+stack.push('l');
 stack.push('a');
-stack.push('k');
-stack.push('e');
+stack.push('l');
+stack.push('a');
 stack.print();
 stack.pop();
 stack.print();
+
+//Creating Stack using array
+
+function StackByArray() {
+    var arr = [];
+    this.push = push;
+    this.pop = pop;
+    this.print = print;
+
+    function push(node) {
+        arr.push(node)
+    }
+
+    function pop() {
+        arr.pop();
+    }
+
+    function print() {
+        console.log(arr.join(' => '))
+    }
+}
+
+var stackByArr = new StackByArray();
+stackByArr.push('l');
+stackByArr.push('a');
+stackByArr.push('l');
+stackByArr.push('a');
+stackByArr.print();
+stackByArr.pop();
+stackByArr.print();
