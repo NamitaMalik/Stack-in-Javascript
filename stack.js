@@ -1,18 +1,18 @@
 class Node {
-    constructor(){
+    constructor() {
         this.data = undefined;
         this.previous = undefined;
     }
 }
 
-class Stack{
-    constructor(){
+class Stack {
+    constructor() {
         this.root = undefined;
     }
 
     push(value) {
         let node = new Node();
-        node.data= value;
+        node.data = value;
         if (!this.root) {
             this.root = node;
             this.root.previous = null;
@@ -23,8 +23,7 @@ class Stack{
     }
 
     pop() {
-        if (!this.root) {
-        } else {
+        if (this.root) {
             let temp = this.root;
             this.root = this.root.previous;
             return temp.data;
@@ -42,7 +41,7 @@ class Stack{
     }
 }
 
-var stack = new Stack();
+let stack = new Stack();
 stack.push('l');
 stack.push('a');
 stack.push('l');
@@ -51,10 +50,10 @@ stack.print();
 stack.pop();
 stack.print();
 
-//Creating Stack using array
 
+// Creating Stack using array
 function StackByArray() {
-    var arr = [];
+    let arr = [];
     this.push = push;
     this.pop = pop;
     this.print = print;
@@ -72,7 +71,7 @@ function StackByArray() {
     }
 }
 
-var stackByArr = new StackByArray();
+let stackByArr = new StackByArray();
 stackByArr.push('l');
 stackByArr.push('a');
 stackByArr.push('l');
